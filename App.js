@@ -1,20 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import Auth from './src/component/screens/Auth/Auth';
+import Profil from './src/component/screens/Profil/Profil';
 
 export default function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <View>
-      <Text style={{ fontsize: 35 }}>Bonjour !</Text>
-      <Button onPress={() => alert("Clique !")} title="Cliques moi">Bonjour !</Button>
+    <View style={classes.container}>
+      {(user === null) ? <Auth /> : <Profil />}
       <StatusBar style="auto" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // style par défaut
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -22,8 +25,9 @@ const styles = StyleSheet.create({
 
 const classes = StyleSheet.create({
   container: {
+    paddingTop: 50,
+    backgroundColor: 'white',
     width: "50%",
-    backgroundColor: "red",
   },
 
   texte: {
