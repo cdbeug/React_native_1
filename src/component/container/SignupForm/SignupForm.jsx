@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const SignupForm = () => {
 	return (
 		<View style={styles.container}>
-			<Text>SignupForm</Text>
+			<Text>Signup</Text>
 		</View>
 	);
 };

@@ -11,14 +11,20 @@ function Auth() {
 	function inverse_isLogin() {
 		setIsLogin(!isLogin);
 	}
-	let affiche_action_login = (isLogin) ? "Signup" : "Log in";
+	let affiche_action_login = (isLogin) ? "Pas encore inscrit ? Inscrivez-vous !" : "Se connecter";
+	let affiche_titre_login = (isLogin) ? "Connexion" : "Inscription";
+	let affiche_message_login = (isLogin) ? "authentifier" : "inscrire";
 
 	return (
 		<>
-			<Card title="Bienvenue" content="Veuillez vous authentifier">
+			<Card title={affiche_titre_login} content={"Veuillez vous " + affiche_message_login}>
 				{(isLogin) ? <LoginForm /> : <SignupForm />}
 			</Card>
-			<TouchableOpacity style={styles.touchableOpacity} onPress={inverse_isLogin}>{affiche_action_login}</TouchableOpacity>
+			<TouchableOpacity style={styles.touchableOpacity} onPress={inverse_isLogin}>
+				<Text>
+					{affiche_action_login}
+				</Text>
+			</TouchableOpacity>
 		</>
 	);
 }
@@ -29,7 +35,7 @@ const styles = StyleSheet.create({
 	},
 	touchableOpacity: {
 		textDecorationLine: 'underline',
-		color: 'blue'
+		color: 'royalblue'
 	}
 });
 
