@@ -6,7 +6,7 @@ import LoginForm from '../../container/LoginForm/LoginForm';
 import SignupForm from '../../container/SignupForm/SignupForm';
 
 function Auth() {
-	const [isLogin, setIsLogin] = useState(false);
+	const [isLogin, setIsLogin] = useState(true);
 
 	function inverse_isLogin() {
 		setIsLogin(!isLogin);
