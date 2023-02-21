@@ -27,7 +27,7 @@ const classes = StyleSheet.create({
   container: {
     paddingTop: 50,
     backgroundColor: 'white',
-    width: "50%",
+    width: "100%",
   },
 
   texte: {
