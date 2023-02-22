@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 	container: {
 	},
 	input: {
-		width: "100%",
+		width: "90%",
 		outlineStyle: "none",
 		backgroundColor: "transparent",
 	},
