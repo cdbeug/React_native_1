@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import Button from '../../ui/Button/Button';
 import InputWithError from "../../ui/InputWithError/InputWithError";
-import { getEmailError, Error_password } from '../../../Utils/validation';
+import { isEmailValid, isPasswordValid, getEmailError, Error_password } from '../../../Utils/validation';
 
 // create a component
 const LoginForm = () => {
@@ -19,6 +19,10 @@ const LoginForm = () => {
 		//Vider les messages d'erreurs
 		setError_email(getEmailError(email));
 		setError_password(Error_password(password));
+	}
+
+	if (isEmailValid(email) && isPasswordValid(password)) {
+
 	}
 
 	return (

@@ -5,7 +5,8 @@ import { AntDesign } from "@expo/vector-icons";
 
 import Button from '../../ui/Button/Button';
 import InputWithError from "../../ui/InputWithError/InputWithError";
-import { getEmailError, getUsernameError, Error_password, getError_confirmPassword, } from '../../../Utils/validation';
+import { isEmailValid, validationUsername, isPasswordValid, isConfirmePasswordSameAsPassword, getEmailError, getUsernameError, Error_password, getError_confirmPassword, } from '../../../Utils/validation';
+import { signupWithEmailAndPassword } from '../../../Utils/requests/authentification';
 
 // create a component
 const SignUpForm = () => {
@@ -27,7 +28,14 @@ const SignUpForm = () => {
 		setError_confirmPassword(
 			getError_confirmPassword(password, confirmPassword)
 		);
+
+		if (isEmailValid(email) && validationUsername(username) && isPasswordValid(password) && isConfirmePasswordSameAsPassword(confirmPassword)) {
+			signupWithEmailAndPassword(email, username, password).then((data) => {
+				console.log(data);
+			});
+		}
 	}
+
 
 	return (
 		<View style={styles.container}>
