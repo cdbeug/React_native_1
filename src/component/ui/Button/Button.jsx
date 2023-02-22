@@ -1,13 +1,13 @@
 //import liraries
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 // create a component
 const Button = ({ action, children, label }) => {
 	return (
 		<TouchableOpacity style={styles.button} onPress={action}>
 			<Text style={styles.button_text}>
-				{children}
-				{label}
+				<View style={styles.icone}>{children}</View>
+				<Text style={styles.button_text}>{label}</Text>
 			</Text>
 		</TouchableOpacity>
 	);
@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
+		display: "flex",
+		flexDirection: "row",
 		// marginLeft: 216,
 		marginLeft: '35%',
 		justifyContent: 'center',
@@ -30,8 +32,16 @@ const styles = StyleSheet.create({
 		backgroundColor: '#061c40',
 		padding: 10,
 	},
+	icone: {
+	},
 	button_text: {
-		color: 'white'
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: 'center',
+		textAlign: 'center',
+		alignItems: 'center',
+		color: 'white',
+		marginLeft: '5%',
 	}
 });
 
