@@ -34,19 +34,17 @@ const LoginForm = () => {
 				holder="Email"
 				valeur={email}
 				action={setEmail}
-				errMessage={error_email}
+				errorMessage={error_email}
 				type="email-adress"
 			/>
-			<Text style={styles.error}>{error_email}</Text>
 			<InputWithError
 				holder="Password"
 				valeur={password}
 				action={setPassword}
-				errMessage={error_password}
+				errorMessage={error_password}
 				type="default"
 				isPassword={true}
 			/>
-			<Text style={styles.error}>{error_password}</Text>
 			<Button action={validate} label="Connexion">
 				<AntDesign name="login" size={24} color="whitesmoke" />
 			</Button>

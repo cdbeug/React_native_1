@@ -1,7 +1,5 @@
-import eyeSlash from "../../../../assets/eye-slash-solid.svg";
-import eye from "../../../../assets/eye-solid.svg";
-
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Feather } from "@expo/vector-icons";
 import { useState } from 'react';
 
 export default function InputWithError({
@@ -14,18 +12,33 @@ export default function InputWithError({
 }) {
 	const [showPassword, setShowPassword] = useState(isPassword)
 
+	const couleurBordure =
+		errorMessage == ""
+			? "green"
+			: errorMessage == undefined
+				? colors.primaryColor
+				: "red";
+
 	function togglePassword() {
 		setShowPassword(!showPassword)
 	}
 	return (
 		<View style={styles.container}>
-			<TextInput
-				placeholder={holder}
-				onChangeText={action}
-				value={valeur}
-				keyboardType={type}
-				secureTextEntry={showPassword}
-			/>
+			<View style={[styles.inputContainer, { borderBottomColor: couleurBordure }]}>
+				<TextInput
+					style={[styles.input]}
+					placeholder={holder}
+					onChangeText={action}
+					value={valeur}
+					keyboardType={type}
+					secureTextEntry={showPassword}
+				/>
+				{isPassword && (
+					<TouchableOpacity onPress={togglePassword}>
+						<Feather name="eye" size={24} color="black" />
+					</TouchableOpacity>
+				)}
+			</View>
 			<Text style={styles.error}>{errorMessage}</Text>
 		</View>
 	);
@@ -36,10 +49,13 @@ const styles = StyleSheet.create({
 	container: {
 	},
 	input: {
-		// border: 'solid',
+		width: "100%",
+		outlineStyle: "none",
+		backgroundColor: "transparent",
 	},
 	error: {
-		color: 'red'
+		color: "red",
+		margin: 5,
 	},
 	button: {
 		// marginLeft: 216,
@@ -53,10 +69,13 @@ const styles = StyleSheet.create({
 		backgroundColor: '#061c40',
 		padding: 10,
 	},
-	button_text: {
-		textAlign: 'center',
-		color: 'white',
-		fontSize: 15,
-		marginHorizontal: 10
-	}
+	inputContainer: {
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		padding: 10,
+		margin: 5,
+		backgroundColor: "white",
+		borderRadius: 5,
+	},
 });
