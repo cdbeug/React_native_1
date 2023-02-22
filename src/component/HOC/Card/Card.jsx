@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
 	container: {
 	},
 	title: {
+		borderTopLeftRadius: 30,
+		borderTopRightRadius: 30,
 		backgroundColor: '#4a6070',
 		color: 'white',
 		fontWeight: 'bold',

@@ -1,6 +1,10 @@
 //import liraries
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
+
+import Button from '../../ui/Button/Button';
+import InputWithError from "../../ui/InputWithError/InputWithError";
 
 function isEmailValid(email) {
 	return email.includes("@") && email.includes(".");
@@ -26,27 +30,26 @@ const LoginForm = () => {
 
 	return (
 		<View style={styles.container}>
-			<TextInput
-				style={styles.input}
-				placeholder="Email"
-				onChangeText={setEmail}
-				value={email}
-				keyboardType="text"
+			<InputWithError
+				holder="Email"
+				valeur={email}
+				action={setEmail}
+				errMessage={error_email}
+				type="email-adress"
 			/>
 			<Text style={styles.error}>{error_email}</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Mot de passe"
-				onChangeText={setPassword}
-				value={password}
-				keyboardType="text"
+			<InputWithError
+				holder="Password"
+				valeur={password}
+				action={setPassword}
+				errMessage={error_password}
+				type="default"
+				isPassword={true}
 			/>
 			<Text style={styles.error}>{error_password}</Text>
-			<TouchableOpacity style={styles.button} onPress={validate}>
-				<Text style={styles.button_text}>
-					Connexion
-				</Text>
-			</TouchableOpacity>
+			<Button action={validate} label="Connexion">
+				<AntDesign name="login" size={24} color="whitesmoke" />
+			</Button>
 		</View >
 	);
 };
@@ -74,7 +77,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	button_text: {
-		color: 'white'
+		textAlign: 'center',
+		color: 'white',
+		fontSize: 15,
+		marginHorizontal: 10
 	}
 });
 
