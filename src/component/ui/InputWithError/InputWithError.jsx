@@ -38,8 +38,8 @@ export default function InputWithError({
 					secureTextEntry={showPassword}
 				/>
 				{isPassword && (
-					<TouchableOpacity onPress={togglePassword}>
-						<Feather name={eye_eye_off} size={24} color="black" />
+					<TouchableOpacity style={styles.icone} onPress={togglePassword}>
+						<Feather name={eye_eye_off} size={24} color={showPassword ? "green" : "orange"} />
 					</TouchableOpacity>
 				)}
 			</View>
@@ -82,4 +82,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		borderRadius: 5,
 	},
+	icone: {
+		width: "10%",
+	}
 });

@@ -5,18 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import Button from '../../ui/Button/Button';
 import InputWithError from "../../ui/InputWithError/InputWithError";
-
-function isEmailValid(email) {
-	return email.includes("@") && email.includes(".");
-}
-
-function isPasswordValid(password) {
-	return password.length >= 6;
-}
-
-function isUsernameValid(username) {
-	return username !== "";
-}
+import { validationUsername, isEmailValid, isPasswordValid, isConfirmePasswordSameAsPassword } from '../../../Utils/validation';
 
 // create a component
 const SignUpForm = () => {
@@ -33,10 +22,10 @@ const SignUpForm = () => {
 	function validate() {
 		//Vider les messages d'erreurs
 		setError_email(!isEmailValid(email) ? "Email incorrecte!" : "");
-		setUsernameError(!isUsernameValid(username) ? "Username obligatoire!" : "");
+		setUsernameError(!validationUsername(username) ? "Username obligatoire!" : "");
 		setError_password(!isPasswordValid(password) ? "Mot de passe trop court!" : "");
 		setError_confirmPassword(
-			password != confirmPassword
+			isConfirmePasswordSameAsPassword(password, confirmPassword)
 				? "Les mots de passes ne sont pas identiques!"
 				: ""
 		);

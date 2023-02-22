@@ -5,14 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import Button from '../../ui/Button/Button';
 import InputWithError from "../../ui/InputWithError/InputWithError";
-
-function isEmailValid(email) {
-	return email.includes("@") && email.includes(".");
-}
-
-function isPasswordValid(password) {
-	return password.length >= 6;
-}
+import { isEmailValid, isPasswordValid } from '../../../Utils/validation';
 
 // create a component
 const LoginForm = () => {
