@@ -10,6 +10,9 @@ export default function InputWithError({
 	type,
 	isPassword
 }) {
+	const [eye_eye_off, setEye_eye_off] = useState("eye");
+
+
 	const [showPassword, setShowPassword] = useState(isPassword)
 
 	const couleurBordure =
@@ -21,6 +24,7 @@ export default function InputWithError({
 
 	function togglePassword() {
 		setShowPassword(!showPassword)
+		setEye_eye_off((!showPassword) ? "eye" : "eye-off");
 	}
 	return (
 		<View style={styles.container}>
@@ -35,7 +39,7 @@ export default function InputWithError({
 				/>
 				{isPassword && (
 					<TouchableOpacity onPress={togglePassword}>
-						<Feather name="eye" size={24} color="black" />
+						<Feather name={eye_eye_off} size={24} color="black" />
 					</TouchableOpacity>
 				)}
 			</View>
