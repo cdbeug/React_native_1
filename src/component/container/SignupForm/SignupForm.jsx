@@ -1,12 +1,14 @@
 //import liraries
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 import Button from '../../ui/Button/Button';
 import InputWithError from "../../ui/InputWithError/InputWithError";
 import { isEmailValid, validationUsername, isPasswordValid, isConfirmePasswordSameAsPassword, getEmailError, getUsernameError, Error_password, getError_confirmPassword, } from '../../../Utils/validation';
 import { signupWithEmailAndPassword } from '../../../Utils/requests/authentification';
+import { UserContext } from '../../../component/contexts/UserContext';
+
 
 // create a component
 const SignUpForm = () => {
@@ -20,6 +22,7 @@ const SignUpForm = () => {
 	const [error_confirmPassword, setError_confirmPassword] = useState("");
 	const [usernameError, setUsernameError] = useState("");
 
+	const { setUtilisateur } = useContext(UserContext);
 	function validate() {
 		//Vider les messages d'erreurs
 		setError_email(getEmailError(email));
@@ -31,11 +34,10 @@ const SignUpForm = () => {
 
 		if (isEmailValid(email) && validationUsername(username) && isPasswordValid(password) && isConfirmePasswordSameAsPassword(confirmPassword)) {
 			signupWithEmailAndPassword(email, username, password).then((data) => {
-				console.log(data);
+				setUtilisateur(data);
 			});
 		}
 	}
-
 
 	return (
 		<View style={styles.container}>
@@ -108,3 +110,4 @@ const styles = StyleSheet.create({
 
 //make this component available to the app
 export default SignUpForm;
+

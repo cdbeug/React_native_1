@@ -6,6 +6,5 @@ export async function signupWithEmailAndPassword(email, username, password) {
 			username: username,
 			avatar: null,
 		});
-
 	});
 }
