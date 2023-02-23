@@ -4,14 +4,22 @@ import { useState } from "react";
 import Auth from './src/component/screens/Auth/Auth';
 import Profil from './src/component/screens/Profil/Profil';
 import { UserContext } from './src/component/contexts/UserContext';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    id: 1,
+    email: "cdbeug@gmail.com",
+    username: "Cyrille",
+    avatar: null,
+  });
 
   return (
-    <UserContext.Provider value={{ utilisateur: user, setUtilisateur: setUser, prenom: "samy" }}>
+    <UserContext.Provider value={{ avatar: null, utilisateur: user, setUtilisateur: setUser, prenom: "samy" }}>
       <ScrollView style={classes.container}>
-        {(user === null) ? <Auth /> : <Profil />}
+        <NavigationContainer>
+          {(user === null) ? <Auth /> : <Profil />}
+        </NavigationContainer>
         <StatusBar style="auto" />
       </ScrollView>
     </UserContext.Provider>
