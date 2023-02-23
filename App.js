@@ -5,6 +5,7 @@ import Auth from './src/component/screens/Auth/Auth';
 import Profil from './src/component/screens/Profil/Profil';
 import { UserContext } from './src/component/contexts/UserContext';
 import { NavigationContainer } from '@react-navigation/native';
+import ProfilsStacks from './src/component/stacks/ProfilsStack';
 
 export default function App() {
   const [user, setUser] = useState({
@@ -16,12 +17,12 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ avatar: null, utilisateur: user, setUtilisateur: setUser, prenom: "samy" }}>
-      <ScrollView style={classes.container}>
+      <View style={styles.container}>
         <NavigationContainer>
-          {(user === null) ? <Auth /> : <Profil />}
+          {(user === null) ? <Auth /> : <ProfilsStacks />}
         </NavigationContainer>
         <StatusBar style="auto" />
-      </ScrollView>
+      </View>
     </UserContext.Provider>
   );
 }
@@ -29,8 +30,6 @@ export default function App() {
 const styles = StyleSheet.create({ // style par défaut
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

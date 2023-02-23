@@ -1,13 +1,32 @@
 import { View, Text } from 'react-native';
-
+import { createStackNavigator } from "@react-navigation/stack"
+import Profil from '../screens/Profil/Profil';
+import Cam from '../screens/Cam/Cam';
+import { colors } from '../../styles/colors';
 const Pile = createStackNavigator();
 
 // create a component
 const ProfilsStacks = () => {
 	return (
-		<Pile.Navigator>
-			<Pile.screen name="profil" component={Profil}></Pile.screen>
-			<Pile.screen name="camera" component={Cam}></Pile.screen>
+		<Pile.Navigator screenOptions={{
+			headerStyle: { backgroundColor: colors.primaryColor },
+			headerTitleStyle: { color: colors.lightColor },
+		}}
+		>
+			<Pile.Screen
+				name="profil"
+				component={Profil}
+				options={{
+					title: "Votre page de profil",
+				}}
+			/>
+			<Pile.Screen
+				options={{
+					title: "Prenez une photo",
+				}}
+				name="camera"
+				component={Cam}
+			/>
 		</Pile.Navigator>
 	);
 };
