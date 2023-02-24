@@ -1,15 +1,18 @@
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
-import { useState, useEffect } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { UserContext } from '../../contexts/UserContext';
 
 const Cam = () => {
+	const context = useContext(UserContext);
 	const [permission, requestPermission] = Camera.useCameraPermissions();
 	const [cameraType, setCameraType] = useState(CameraType.back);
 
 	let size = Dimensions.get("window");
 	const largeurCamera = size.width;
 	const hauteurCamera = (size.width * 16) / 9;
+	const cameraRef = useRef();
 
 	useEffect(() => {
 		if (permission && permission.status != "granted") {
@@ -22,7 +25,11 @@ const Cam = () => {
 		setCameraType(cameraType === CameraType.back ? CameraType.front : CameraType.back);
 	}
 
-	console.log(permission);
+	async function takePick() {
+		let image = await cameraRef.current.takePictureAsync();
+		context.setUtilisateur({ ...context.utilisateur, avatar: image });
+	}
+
 	if (!permission) {
 		return <Text>Veuillez  autoriser la camera</Text>
 	}
@@ -33,14 +40,17 @@ const Cam = () => {
 
 	return (
 		<View style={styles.container}>
-			<Camera type={cameraType} ratio="16.9"
+			<Camera
+				ref={cameraRef}
+				type={cameraType}
+				ratio="16:9"
 				style={{ width: largeurCamera, height: hauteurCamera }}
 			>
 				<View style={styles.buttons}>
 					<TouchableOpacity onPress={toggleCameraType}>
 						<MaterialIcons name="flip-camera-android" size={24} color="red" />
 					</TouchableOpacity>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={takePick}>
 						<MaterialIcons name="camera" size={24} color="green" />
 					</TouchableOpacity>
 				</View>
