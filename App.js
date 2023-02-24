@@ -8,12 +8,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import ProfilsStacks from './src/component/stacks/ProfilsStack';
 
 export default function App() {
-  const [user, setUser] = useState({
+  const userFromDb = {
     id: 1,
-    email: "cdbeug@gmail.com",
-    username: "Cyrille",
+    email: "sam.djm93@gmail.com",
+    username: "Samy",
     avatar: null,
-  });
+  };
+  const [user, setUser] = useState(userFromDb);
 
   return (
     <UserContext.Provider value={{ avatar: null, utilisateur: user, setUtilisateur: setUser, prenom: "samy" }}>
@@ -29,6 +30,7 @@ export default function App() {
 
 const styles = StyleSheet.create({ // style par défaut
   container: {
+    paddingTop: 50,
     flex: 1,
   },
 });
