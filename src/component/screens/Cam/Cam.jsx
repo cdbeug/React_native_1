@@ -9,8 +9,10 @@ const Cam = () => {
 	const hauteurCamera = (size.width * 16) / 9;
 
 	useEffect(() => {
-		requestPermission();
-	}, []
+		if (permission && permission.status != "granted") {
+			requestPermission();
+		}
+	}, [permission]
 	);
 
 

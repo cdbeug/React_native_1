@@ -21,11 +21,11 @@ const ProfilsStacks = () => {
 				}}
 			/>
 			<Pile.Screen
+				name="camera"
+				component={Cam}
 				options={{
 					title: "Prenez une photo",
 				}}
-				name="camera"
-				component={Cam}
 			/>
 		</Pile.Navigator>
 	);
