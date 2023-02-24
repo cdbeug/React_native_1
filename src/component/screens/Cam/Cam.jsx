@@ -1,9 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { Camera } from 'expo-camera';
-import { useEffect } from 'react';
+import { Camera, CameraType } from 'expo-camera';
+import { useState, useEffect } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Cam = () => {
 	const [permission, requestPermission] = Camera.useCameraPermissions();
+	const [cameraType, setCameraType] = useState(CameraType.back);
+
 	let size = Dimensions.get("window");
 	const largeurCamera = size.width;
 	const hauteurCamera = (size.width * 16) / 9;
@@ -15,6 +18,9 @@ const Cam = () => {
 	}, [permission]
 	);
 
+	function toggleCameraType() {
+		setCameraType(cameraType === CameraType.back ? CameraType.front : CameraType.back);
+	}
 
 	console.log(permission);
 	if (!permission) {
@@ -27,9 +33,18 @@ const Cam = () => {
 
 	return (
 		<View style={styles.container}>
-			<Camera ratio="16.9"
+			<Camera type={cameraType} ratio="16.9"
 				style={{ width: largeurCamera, height: hauteurCamera }}
-			></Camera>
+			>
+				<View style={styles.buttons}>
+					<TouchableOpacity onPress={toggleCameraType}>
+						<MaterialIcons name="flip-camera-android" size={24} color="red" />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<MaterialIcons name="camera" size={24} color="green" />
+					</TouchableOpacity>
+				</View>
+			</Camera>
 		</View >
 	);
 };
@@ -39,6 +54,16 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "100%"
 	},
+	buttons: {
+		display: "flex",
+		flexDirection: "row",
+		width: "75%",
+		alignSelf: "center",
+		justifyContent: "space-around",
+		alignItems: "center",
+		position: "absolute",
+		bottom: 100,
+	}
 });
 
 export default Cam;
