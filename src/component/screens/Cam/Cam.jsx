@@ -4,7 +4,7 @@ import { useContext, useState, useRef, useEffect } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../../contexts/UserContext';
 
-const Cam = () => {
+const Cam = (props) => {
 	const context = useContext(UserContext);
 	const [permission, requestPermission] = Camera.useCameraPermissions();
 	const [cameraType, setCameraType] = useState(CameraType.back);
@@ -28,6 +28,7 @@ const Cam = () => {
 	async function takePick() {
 		let image = await cameraRef.current.takePictureAsync();
 		context.setUtilisateur({ ...context.utilisateur, avatar: image });
+		props.navigation.pop();
 	}
 
 	if (!permission) {
